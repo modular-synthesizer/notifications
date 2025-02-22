@@ -28,7 +28,10 @@ app.get('/', cors(), async (req: Request, res: Response) => {
 
   console.log("Added a new connection for session " + token + " at index " + id)
 
-  req.on('close', () => removeFromRegistry(token, id));
+  req.on('close', () => {
+    console.log("Closing connection for token " + token + " and id " + id)
+    removeFromRegistry(token, id)
+  });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
