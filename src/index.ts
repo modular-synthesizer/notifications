@@ -20,6 +20,9 @@ app.get('/', cors(), async (req: Request, res: Response) => {
     return;
   }
 
+  console.log("Sending the retry command");
+  res.write('retry: 0')
+
   const token: string = `${req.query.auth_token}`;
   const id: string = await addToRegistry(token, res);
 
