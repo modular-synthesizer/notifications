@@ -3,6 +3,21 @@ import { createConnection } from "./rabbitmq"
 import { Channel, ConsumeMessage } from "amqplib";
 import { v4 as uuid } from 'uuid'
 
+/**
+ * TODO : deport all the logic of the different queue for one session on RMQ.
+ * 
+ * Context : if the same session is connected on two different screens that are in turn connected
+ * on two different instances of the applications when it's scaled, they will be consuming in the
+ * same queue, thus one will have the message and not the other.
+ * 
+ * Solution : we should be doing one queue for each instance of a session connected here, and route
+ * the messages in RMQ to be "duplicated" in each session instance's queue. This way each instance
+ * of the same client will have a dedicated queue, and a dedicated instance of a message.
+ * 
+ * Other solution : when scaled, ensure that the same session UUID is always routed to the same
+ * instance of the notifications service, thus all the current logic could be kept.
+ */
+
 type SessionBinding = {
   channel: Channel,
   responses: Record<string, Response>
