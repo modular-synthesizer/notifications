@@ -10,6 +10,8 @@ dotenv.config();
 const app: Express = express();
 const port: number = +(process.env.PORT || '4000');
 
+app.use(cors());
+
 app.get('/', cors(), async (req: Request, res: Response) => {
   writeHeaders(res);
 
