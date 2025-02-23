@@ -33,10 +33,11 @@ const { AMQP_URL } = process.env;
     const queue: string = `${token}.${tmpUuid}`;
     channel.assertQueue(queue, { autoDelete: true, durable: true });
     channel.bindQueue(queue, 'production.commands', token);
+    console.log("Starting consumer for " + token + " --- " + tmpUuid)
     channel.consume(queue, handleMessage);
 
     req.on('close', () => {
-      console.log("Closing the connection now ?");
+      console.log("Closing the connection for " + token + " --- " + tmpUuid);
       channel.close();
       res.end();
     })
