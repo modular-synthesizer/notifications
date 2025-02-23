@@ -18,7 +18,8 @@ const { AMQP_URL } = process.env;
 (async () => {
   const connection = await amqplib.connect(AMQP_URL || '');
   app.get("/", cors(), async (req: Request, res: Response) => {
-    writeSSEHeaders(res)
+    writeSSEHeaders(res);
+    res.write('retry: 0\n\n');
     const channel = await connection.createChannel();
     function handleMessage(message: ConsumeMessage | null) {
       if (message === null) return;
