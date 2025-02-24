@@ -26,6 +26,7 @@ export const sse = {
    * @param content the raw content to be formatted as a SSE valid data string.
    */
   send(response: Response, content: string) {
+    console.log(`Sending message ${content}`)
     response.write(`data: ${content}\n\n`);
   }
 }
