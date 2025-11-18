@@ -1,5 +1,5 @@
-import { Channel } from "amqplib";
-import { Response } from "express";
+import type { Channel } from "amqplib";
+import type { Response } from "express";
 
 export const sse = {
   async end(response: Response, channel: Channel) {

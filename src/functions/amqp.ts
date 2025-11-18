@@ -1,4 +1,4 @@
-import amqplib, { Channel, ConsumeMessage } from 'amqplib';
+import amqplib, { type Channel, type ConsumeMessage } from 'amqplib';
 import { v4 as uuid } from 'uuid'
 
 type ConsumerCallback = (message: string) => void;
